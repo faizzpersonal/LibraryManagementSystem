@@ -8,12 +8,12 @@ pipeline {
         FRONTEND_IMAGE = "${DOCKERHUB_USERNAME}/library-frontend:latest"
     }
 
-    stages {
-        stage('Checkout') {
-            steps {
-                git 'https://github.com/faizzpersonal/LibraryManagementSystem.git'
-            }
+    stage('Checkout') {
+    steps {
+        git branch: 'main',
+            url: 'https://github.com/faizzpersonal/LibraryManagementSystem.git'
         }
+    }
 
         stage('Build Backend Image') {
             steps {
