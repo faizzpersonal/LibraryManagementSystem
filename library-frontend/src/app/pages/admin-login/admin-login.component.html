@@ -1,0 +1,39 @@
+<app-navbar></app-navbar>
+
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+  <div class="card shadow p-4 login-card" style="max-width: 400px; width: 100%;">
+    <h2 class="text-center text-primary mb-4">Admin Login</h2>
+
+    <form (ngSubmit)="login()" class="row g-3">
+      <div class="col-12">
+        <input type="text" class="form-control" placeholder="Username" [(ngModel)]="username" name="username" required>
+      </div>
+      <div class="col-12">
+        <input type="password" class="form-control" placeholder="Password" [(ngModel)]="password" name="password" required>
+      </div>
+      <div class="col-12 text-center">
+        <button type="submit" class="btn btn-primary mt-3 w-100">
+          <i class="bi bi-box-arrow-in-right me-1"></i> Login
+        </button>
+      </div>
+    </form>
+
+    <p class="text-center text-danger mt-3">{{ error }}</p>
+  </div>
+</div>
+
+<style>
+  .login-card {
+    border-radius: 10px;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .login-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  }
+
+  input.form-control {
+    border-radius: 5px;
+  }
+</style>

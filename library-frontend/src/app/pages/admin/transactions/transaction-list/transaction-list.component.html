@@ -1,0 +1,87 @@
+<app-admin-navbar></app-admin-navbar>
+
+<div class="container my-5">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="text-primary">Transaction Management</h2>
+    <div class="d-flex align-items-center gap-2 flex-wrap">
+
+      <input
+        type="text"
+        placeholder="Search by user, book, or status..."
+        [(ngModel)]="searchText"
+        (input)="filterTransactions()"
+        class="form-control"
+        style="width: 300px;"
+      />
+      <a routerLink="/admin/transactions/add" class="btn btn-outline-success btn-sm">
+        <i class="bi bi-plus-circle me-1"></i> Add Transaction
+      </a>
+      <button class="btn btn-outline-secondary btn-sm" [routerLink]="['/admin-dashboard']">
+        <i class="bi bi-arrow-left-circle me-1"></i> Back to Dashboard
+      </button>
+    </div>
+  </div>
+
+  <div class="mb-3 d-flex gap-2 flex-wrap">
+    <button class="btn btn-outline-info btn-sm" (click)="filterTransactions('ALL')">All</button>
+    <button class="btn btn-outline-primary btn-sm" (click)="filterTransactions('BORROWED')">Borrowed</button>
+    <button class="btn btn-outline-success btn-sm" (click)="filterTransactions('RETURNED')">Returned</button>
+    <button class="btn btn-outline-danger btn-sm" (click)="filterTransactions('OVERDUE')">Overdue</button>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-hover align-middle">
+      <thead class="table-light">
+        <tr>
+          <th>ID</th>
+          <th>User</th>
+          <th>Phone</th>
+          <th>Book</th>
+          <th>Borrow Date</th>
+          <th>Due Date</th>
+          <th>Return Date</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let t of transactions">
+          <td>{{ t.id }}</td>
+          <td>{{ t.user.name }}</td>
+          <td>{{ t.user.phone }}</td>
+          <td>{{ t.book.title }}</td>
+          <td>{{ t.borrowDate | date:'shortDate' }}</td>
+          <td>{{ t.dueDate | date:'shortDate' }}</td>
+          <td>{{ t.returnDate ? (t.returnDate | date:'shortDate') : '-' }}</td>
+          <td>
+            <span class="badge"
+                  [ngClass]="{
+                    'bg-primary': t.status.toUpperCase() === 'BORROWED',
+                    'bg-success': t.status.toUpperCase() === 'RETURNED',
+                    'bg-danger': t.status.toUpperCase() === 'OVERDUE'
+                  }">
+              {{ t.status }}
+            </span>
+          </td>
+          <td class="d-flex flex-wrap gap-1">
+            <button class="btn btn-outline-primary btn-sm" (click)="editTransaction(t.id)">
+              <i class="bi bi-pencil-square me-1"></i> Edit
+            </button>
+            <button class="btn btn-outline-danger btn-sm" (click)="deleteTransaction(t.id)">
+              <i class="bi bi-trash me-1"></i> Delete
+            </button>
+            <button class="btn btn-outline-warning btn-sm" *ngIf="t.status !== 'Returned'" (click)="returnTransaction(t.id)">
+              <i class="bi bi-arrow-counterclockwise me-1"></i> Return
+            </button>
+            <button class="btn btn-outline-info btn-sm" *ngIf="t.status === 'Returned' && t.hasFine" (click)="viewFine(t.id)">
+              <i class="bi bi-cash-stack me-1"></i> View Fine
+            </button>
+          </td>
+        </tr>
+        <tr *ngIf="transactions.length === 0">
+          <td colspan="9" class="text-center text-muted">No transactions found.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

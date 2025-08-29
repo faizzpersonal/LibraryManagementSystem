@@ -1,0 +1,50 @@
+<app-admin-navbar></app-admin-navbar>
+
+<div class="container my-5">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="text-primary">Users Management</h2>
+    <div>
+      <button class="btn btn-outline-success me-2" (click)="addUser()">
+        <i class="bi bi-plus-circle me-1"></i> Add New User
+      </button>
+      <button class="btn btn-outline-secondary" [routerLink]="['/admin-dashboard']">
+        <i class="bi bi-arrow-left-circle me-1"></i> Back to Dashboard
+      </button>
+    </div>
+  </div>
+
+  <div class="row g-4">
+    <div class="col-md-4" *ngFor="let user of users">
+      <div class="card shadow-sm h-100 user-card">
+        <div class="card-body d-flex flex-column justify-content-between">
+          <div>
+            <h5 class="card-title text-primary">{{ user.name }}</h5>
+            <p class="card-text mb-1"><strong>Email:</strong> {{ user.email }}</p>
+            <p class="card-text mb-1"><strong>Phone No:</strong> {{ user.phone }}</p>
+            <p class="card-text mb-2"><strong>Role:</strong> {{ user.role }}</p>
+          </div>
+          <div class="d-flex justify-content-between">
+            <button class="btn btn-outline-primary btn-sm" (click)="editUser(user.id!)">
+              <i class="bi bi-pencil-square me-1"></i> Edit
+            </button>
+            <button class="btn btn-outline-danger btn-sm" (click)="deleteUser(user.id!)">
+              <i class="bi bi-trash me-1"></i> Delete
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .user-card {
+    border-radius: 10px;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .user-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  }
+</style>

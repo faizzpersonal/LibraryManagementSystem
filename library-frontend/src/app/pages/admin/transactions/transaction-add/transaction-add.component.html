@@ -1,0 +1,78 @@
+<app-admin-navbar></app-admin-navbar>
+
+<div class="container my-5 d-flex justify-content-center">
+  <div class="card shadow p-4" style="max-width: 600px; width: 100%;">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h2 class="text-primary">Add New Transaction</h2>
+      <button class="btn btn-outline-secondary btn-sm" [routerLink]="['/admin/transactions']">
+        <i class="bi bi-arrow-left-circle me-1"></i> Back to Transaction List
+      </button>
+    </div>
+
+    <form #transactionForm="ngForm" (ngSubmit)="addTransaction()">
+
+      <div class="mb-3">
+        <label class="form-label">User:</label>
+        <select class="form-select" [(ngModel)]="newTransaction.user" name="user" required>
+          <option *ngFor="let u of users" [ngValue]="u">
+            {{ u.name }} ({{ u.role }})
+          </option>
+        </select>
+      </div>
+
+
+      <div class="mb-3">
+        <label class="form-label">Book:</label>
+        <ng-container *ngIf="newTransaction.book?.id; else selectBook">
+          <input type="text" class="form-control" [value]="newTransaction.book.title + ' - ' + newTransaction.book.author" readonly>
+        </ng-container>
+        <ng-template #selectBook>
+          <select class="form-select" [(ngModel)]="newTransaction.book" name="book" required>
+            <option *ngFor="let b of books" [ngValue]="b">
+              {{ b.title }} - {{ b.author }} ({{ b.noOfCopies }} copies)
+            </option>
+          </select>
+        </ng-template>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Borrow Date:</label>
+        <input 
+          type="date" 
+          class="form-control" 
+          [(ngModel)]="newTransaction.borrowDate" 
+          name="borrowDate" 
+          required
+          [attr.min]="today | date:'yyyy-MM-dd'">
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Due Date:</label>
+        <input 
+          type="date" 
+          class="form-control" 
+          [(ngModel)]="newTransaction.dueDate" 
+          name="dueDate" 
+          required
+          [attr.min]="newTransaction.borrowDate || (today | date:'yyyy-MM-dd')">
+      </div>
+
+      <div class="mb-4">
+        <label class="form-label">Status:</label>
+        <select class="form-select" [(ngModel)]="newTransaction.status" name="status" required>
+          <option value="Borrowed">Borrowed</option>
+        </select>
+      </div>
+
+
+      <div class="text-end">
+        <button 
+          type="submit" 
+          class="btn btn-outline-primary"
+          [disabled]="transactionForm.invalid || !newTransaction.book || !isBookAvailable(newTransaction.book)">
+          <i class="bi bi-plus-circle me-1"></i> Add Transaction
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

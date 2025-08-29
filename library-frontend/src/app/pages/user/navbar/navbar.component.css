@@ -1,0 +1,4 @@
+/* Match the navbar height (adjust if py changes) */
+.navbar-spacer {
+    height: 70px; /* py-3 ~ 70px */
+}

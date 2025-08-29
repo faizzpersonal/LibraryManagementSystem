@@ -1,0 +1,64 @@
+<app-admin-navbar></app-admin-navbar>
+
+<div class="container mt-5 d-flex justify-content-center">
+  <div class="card shadow p-4 edit-card" style="max-width: 600px; width: 100%;">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h2 class="text-primary mb-0">Edit Fine</h2>
+      <button class="btn btn-outline-secondary btn-sm" [routerLink]="['/admin/fines']">
+        <i class="bi bi-arrow-left-circle me-1"></i> Back to Fine List
+      </button>
+    </div>
+
+    <form (ngSubmit)="updateFine()" class="row g-3">
+      <div class="col-12">
+        <label class="form-label">Transaction ID</label>
+        <input type="text" class="form-control" [value]="fine.transaction.id" disabled>
+      </div>
+
+      <div class="col-12">
+        <label class="form-label">User Name</label>
+        <input type="text" class="form-control" [value]="fine.transaction.user.name" disabled>
+      </div>
+
+      <div class="col-12">
+        <label class="form-label">User Phone</label>
+        <input type="text" class="form-control" [value]="fine.transaction.user.phone" disabled>
+      </div>
+
+      <div class="col-12">
+        <label class="form-label">Amount</label>
+        <input type="number" class="form-control" [(ngModel)]="fine.amount" name="amount">
+      </div>
+
+      <div class="col-12">
+        <label class="form-label">Status</label>
+        <select class="form-select" [(ngModel)]="fine.status" name="status">
+          <option value="PAID">Paid</option>
+          <option value="UNPAID">Unpaid</option>
+        </select>
+      </div>
+
+      <div class="col-12 text-end mt-3">
+        <button class="btn btn-outline-primary" type="submit">
+          <i class="bi bi-save me-1"></i> Update Fine
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<style>
+  .edit-card {
+    border-radius: 10px;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .edit-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  }
+
+  input.form-control, select.form-select {
+    border-radius: 5px;
+  }
+</style>

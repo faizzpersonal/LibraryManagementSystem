@@ -1,0 +1,36 @@
+<app-navbar></app-navbar>
+<div class="container mt-5">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="text-primary">Books</h2>
+    <div>
+    </div>
+  </div>
+
+  <div class="row g-4">
+    <div *ngFor="let book of books" class="col-sm-6 col-md-4 col-lg-3">
+      <div class="card shadow-sm p-3 h-100 book-card">
+        <img *ngIf="book.imageUrl" [src]="book.imageUrl" alt="{{book.title}}" class="img-fluid mb-3" style="height: 220px; object-fit: contain; border-radius: 5px;">
+        <h5 class="card-title">{{ book.title }}</h5>
+        <p class="card-text mb-1 text-secondary">{{ book.author }}</p>
+        <p class="card-text mb-3">{{ book.category }}</p>
+        <div class="mt-auto d-flex justify-content-between">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<footer class="bg-primary text-white py-4 text-center">
+  &copy; 2025 The State Library
+</footer>
+
+<style>
+  .book-card {
+    border-radius: 10px;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .book-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+  }
+</style>

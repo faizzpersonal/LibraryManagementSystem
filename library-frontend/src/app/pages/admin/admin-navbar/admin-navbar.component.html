@@ -1,0 +1,23 @@
+<nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" 
+     style="background-color: #f8f9fa; box-shadow: 0 2px 5px rgba(0,0,0,0.05);" id="adminNav">
+  <div class="container px-4 px-lg-5">
+    <!-- Primary blue text for Admin Dashboard -->
+    <a class="navbar-brand fw-bold" style="color: #6883ee;" routerLink="/admin-dashboard">Admin Dashboard</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#adminNavbarResponsive"
+        aria-controls="adminNavbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="adminNavbarResponsive">
+      <ul class="navbar-nav ms-auto my-2 my-lg-0">
+        <li class="nav-item"><a class="nav-link" routerLink="/admin/books">Books</a></li>
+        <li class="nav-item"><a class="nav-link" routerLink="/admin/users">Users</a></li>
+        <li class="nav-item"><a class="nav-link" routerLink="/admin/transactions">Transactions</a></li>
+        <li class="nav-item"><a class="nav-link" routerLink="/admin/fines">Fines</a></li>
+        <li class="nav-item"><a class="nav-link text-danger" (click)="logout()">Logout</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div style="height: 70px;"></div>

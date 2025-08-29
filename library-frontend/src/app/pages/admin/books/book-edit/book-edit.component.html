@@ -1,0 +1,64 @@
+<app-admin-navbar></app-admin-navbar>
+
+<div class="container mt-5 d-flex justify-content-center">
+  <div class="card shadow p-4 edit-card" style="max-width: 600px; width: 100%;">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h2 class="text-primary mb-0">Edit Book</h2>
+      <button class="btn btn-outline-secondary btn-sm" [routerLink]="['/admin/books']">
+        <i class="bi bi-arrow-left-circle me-1"></i> Back to Book List
+      </button>
+    </div>
+
+    <form (ngSubmit)="updateBook()" class="row g-3">
+      <div class="col-12">
+        <input class="form-control" placeholder="Title" [(ngModel)]="book.title" name="title" required>
+      </div>
+
+      <div class="col-12">
+        <input class="form-control" placeholder="Author" [(ngModel)]="book.author" name="author" required>
+      </div>
+
+      <div class="col-12">
+        <input class="form-control" placeholder="ISBN" [(ngModel)]="book.isbn" name="isbn">
+      </div>
+
+      <div class="col-12">
+        <input class="form-control" placeholder="Category" [(ngModel)]="book.category" name="category">
+      </div>
+
+      <div class="col-12">
+        <input class="form-control" placeholder="SubCategory" [(ngModel)]="book.subCategory" name="subCategory">
+      </div>
+
+      <div class="col-6">
+        <input class="form-control" type="number" placeholder="Year" [(ngModel)]="book.year" name="year">
+      </div>
+
+      <div class="col-6">
+        <input class="form-control" type="number" placeholder="No of Copies" [(ngModel)]="book.noOfCopies" name="noOfCopies">
+      </div>
+
+      <div class="col-12 text-end mt-3">
+        <button class="btn btn-outline-primary" type="submit">
+          <i class="bi bi-save me-1"></i> Update Book
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<style>
+  .edit-card {
+    border-radius: 10px;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .edit-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  }
+
+  input.form-control, select.form-select {
+    border-radius: 5px;
+  }
+</style>

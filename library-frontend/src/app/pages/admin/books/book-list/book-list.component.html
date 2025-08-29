@@ -1,0 +1,76 @@
+<app-admin-navbar></app-admin-navbar>
+
+<div class="container mt-5">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="text-primary">Books Management</h2>
+
+    <div class="d-flex align-items-center gap-2">
+      <input
+        type="text"
+        placeholder="Search by title, author, category..."
+        [(ngModel)]="searchText"
+        (input)="filterBooks()"
+        class="form-control"
+        style="width: 300px;"
+      />
+
+      <button class="btn btn-outline-success me-2" (click)="addBook()">
+        <i class="bi bi-plus-circle me-1"></i> Add New Book
+      </button>
+
+
+      <button class="btn btn-outline-secondary" [routerLink]="['/admin-dashboard']">
+        <i class="bi bi-arrow-left-circle me-1"></i> Back to Dashboard
+      </button>
+    </div>
+  </div>
+
+
+  <div class="row g-4">
+    <div *ngFor="let book of books; trackBy: trackById" class="col-sm-6 col-md-4 col-lg-3">
+      <div class="card shadow-sm p-3 h-100 book-card">
+        <img
+          *ngIf="book.imageUrl"
+          [src]="book.imageUrl"
+          alt="{{book.title}}"
+          class="img-fluid mb-3"
+          style="height: 220px; object-fit: contain; border-radius: 5px;"
+        />
+        <h5 class="card-title">{{ book.title }}</h5>
+        <p class="card-text mb-1 text-secondary">{{ book.author }}</p>
+        <p class="card-text mb-3"><strong>Copies:</strong> {{ book.noOfCopies }}</p>
+
+        <div class="mt-auto d-flex justify-content-between">
+          <button class="btn btn-sm btn-outline-primary" (click)="editBook(book.id!)">
+            <i class="bi bi-pencil-square"></i> Edit
+          </button>
+          <button class="btn btn-sm btn-outline-danger" (click)="deleteBook(book.id!)">
+            <i class="bi bi-trash"></i> Delete
+          </button>
+          <button 
+  class="btn btn-sm btn-outline-success" 
+  [disabled]="book.noOfCopies === 0"
+  (click)="borrowBook(book)">
+  <i class="bi bi-plus-circle me-1"></i> Borrow
+</button>
+
+        </div>
+      </div>
+    </div>
+    <div *ngIf="books.length === 0" class="col-12 text-center text-muted mt-4">
+      No books found.
+    </div>
+  </div>
+</div>
+
+<style>
+  .book-card {
+    border-radius: 10px;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .book-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+  }
+</style>

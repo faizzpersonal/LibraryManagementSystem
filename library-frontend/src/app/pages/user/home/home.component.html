@@ -1,0 +1,169 @@
+<app-navbar></app-navbar>
+
+
+<section class="hero bg-primary text-white text-center py-5">
+  <div class="container">
+    <h1 class="display-4 fw-bold">Welcome to The State Library</h1>
+    <p class="lead">A world of knowledge and resources at your fingertips</p>
+    <a routerLink="/about" class="btn btn-light btn-lg mt-3">Learn More</a>
+  </div>
+</section>
+
+
+<section class="about-us py-5">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-md-6 text-center">
+        <img src="assets/library1.jpg" alt="Library Building" class="img-fluid rounded shadow-sm about-img">
+      </div>
+      <div class="col-md-6">
+        <h2 class="text-primary mb-4">About The State Library</h2>
+        <p>
+          The State Library in New Delhi has been serving the community for decades. We provide access to thousands of books, journals, and digital resources. 
+        </p>
+        <p>
+          Our mission is to make knowledge accessible to everyone. We host reading sessions, workshops, and cultural events for all age groups.
+        </p>
+        <a routerLink="/contact" class="btn btn-primary mt-3"><i class="bi bi-envelope me-1"></i> Contact Us</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="featured-books py-5 bg-light">
+  <div class="container">
+    <h2 class="text-center text-primary mb-5">Featured Books</h2>
+    <div class="row g-4">
+      <div class="col-md-3 text-center">
+        <div class="card h-100 shadow-sm">
+          <img src="assets/book1.jpg" class="card-img-top" alt="Book 1">
+          <div class="card-body">
+            <h5 class="card-title">Harry Potter Series</h5>
+            <p class="card-text">J.K. Rowling </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 text-center">
+        <div class="card h-100 shadow-sm">
+          <img src="assets/book2.jpg" class="card-img-top" alt="Book 2">
+          <div class="card-body">
+            <h5 class="card-title">The Alchemist</h5>
+            <p class="card-text">Paulo Coelho </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 text-center">
+        <div class="card h-100 shadow-sm">
+          <img src="assets/book3.jpg" class="card-img-top" alt="Book 3">
+          <div class="card-body">
+            <h5 class="card-title">You Only Live Once</h5>
+            <p class="card-text">Stuti Changle</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 text-center">
+        <div class="card h-100 shadow-sm">
+          <img src="assets/book4.jpg" class="card-img-top" alt="Book 4">
+          <div class="card-body">
+            <h5 class="card-title">The Blue Umbrella</h5>
+            <p class="card-text">Ruskin Bond</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Services -->
+<section class="services py-5">
+  <div class="container text-center">
+    <h2 class="text-primary mb-5">Our Services</h2>
+    <div class="row">
+      <div class="col-md-3">
+        <i class="bi bi-book display-4 text-primary mb-2"></i>
+        <h5>Book Lending</h5>
+        <p>Borrow books and return at your convenience.</p>
+      </div>
+      <div class="col-md-3">
+        <i class="bi bi-journal display-4 text-primary mb-2"></i>
+        <h5>Digital Resources</h5>
+        <p>Access e-books, journals, and online databases.</p>
+      </div>
+      <div class="col-md-3">
+        <i class="bi bi-calendar-event display-4 text-primary mb-2"></i>
+        <h5>Events & Workshops</h5>
+        <p>Participate in reading sessions and workshops.</p>
+      </div>
+      <div class="col-md-3">
+        <i class="bi bi-people display-4 text-primary mb-2"></i>
+        <h5>Community Programs</h5>
+        <p>Join our cultural and educational community programs.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="testimonials py-5 bg-light">
+  <div class="container text-center">
+    <h2 class="text-primary mb-5">What Our Visitors Say</h2>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="card p-3 shadow-sm">
+          <p>"A fantastic place to read and learn. The staff are very helpful!"</p>
+          <h6>- Rahul Sharma</h6>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card p-3 shadow-sm">
+          <p>"The digital resources are amazing. I found all the books I needed."</p>
+          <h6>- Priya Verma</h6>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card p-3 shadow-sm">
+          <p>"Love the community programs! It's perfect for my kids."</p>
+          <h6>- Ankit Singh</h6>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="newsletter py-5">
+  <div class="container text-center">
+    <h2 class="text-primary mb-4">Subscribe to Our Newsletter</h2>
+    <p>Stay updated on the latest books, events, and workshops.</p>
+    <div class="d-flex justify-content-center">
+      <input type="email" class="form-control w-50 me-2" placeholder="Enter your email">
+      <button class="btn btn-primary">Subscribe</button>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-primary text-white py-4 text-center">
+  &copy; 2025 The State Library
+</footer>
+
+<style>
+.hero {
+  background: linear-gradient(to right, #0056b3, #3399ff);
+}
+.about-img {
+  max-height: 300px;
+  width: 550px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+section p {
+  font-size: 1rem;
+  line-height: 1.6;
+}
+h2 {
+  font-weight: 600;
+}
+.card {
+  border-radius: 10px;
+}
+</style>
