@@ -15,7 +15,7 @@ spec:
       containers:
         - name: library-frontend
           image: library-frontend
-          imagePullPolicy: Always
+          imagePullPolicy: Never
           ports:
             - containerPort: 80
 ---
