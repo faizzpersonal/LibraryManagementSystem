@@ -15,7 +15,7 @@ spec:
       containers:
         - name: lms-backend
           image: lms-backend
-          imagePullPolicy: Never
+          imagePullPolicy: Always
           env:
             - name: SPRING_DATASOURCE_URL
               value: jdbc:mysql://mysqldb:3306/LMS
