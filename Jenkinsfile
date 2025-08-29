@@ -1,20 +1,18 @@
 pipeline {
     agent any
-
     environment {
         DOCKERHUB_CREDENTIALS = 'Docker'
         DOCKERHUB_USERNAME = 'faizzpersonal'
         BACKEND_IMAGE = "${DOCKERHUB_USERNAME}/lms-backend:latest"
         FRONTEND_IMAGE = "${DOCKERHUB_USERNAME}/library-frontend:latest"
     }
-
-    stage('Checkout') {
-    steps {
-        git branch: 'main',
-            url: 'https://github.com/faizzpersonal/LibraryManagementSystem.git'
+    stages {
+        stage('Checkout') {
+            steps {
+                git branch: 'main',
+                    url: 'https://github.com/faizzpersonal/LibraryManagementSystem.git'
+            }
         }
-    }
-
         stage('Build Backend Image') {
             steps {
                 dir('LMS') {
@@ -23,7 +21,6 @@ pipeline {
                 }
             }
         }
-
         stage('Build Frontend Image') {
             steps {
                 dir('library-frontend') {
@@ -33,7 +30,6 @@ pipeline {
                 }
             }
         }
-
         stage('Push Images') {
             steps {
                 withCredentials([usernamePassword(credentialsId: DOCKERHUB_CREDENTIALS, usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
@@ -44,7 +40,6 @@ pipeline {
                 }
             }
         }
-
         stage('Deploy to Kubernetes') {
             steps {
                 withCredentials([file(credentialsId: 'kube', variable: 'KUBECONFIG')]) {
