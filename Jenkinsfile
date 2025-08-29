@@ -1,11 +1,10 @@
 pipeline {
     agent any
+
     environment {
-        DOCKERHUB_CREDENTIALS = 'Docker'
-        DOCKERHUB_USERNAME = 'faizzpersonal'
-        BACKEND_IMAGE = "${DOCKERHUB_USERNAME}/lms-backend:latest"
-        FRONTEND_IMAGE = "${DOCKERHUB_USERNAME}/library-frontend:latest"
+        PATH = "/usr/local/bin:${env.PATH}"
     }
+
     stages {
         stage('Checkout') {
             steps {
@@ -13,30 +12,30 @@ pipeline {
                     url: 'https://github.com/faizzpersonal/LibraryManagementSystem.git'
             }
         }
-        stage('Build Backend Image') {
+        stage('Build Backend') {
             steps {
                 dir('LMS') {
                     sh 'chmod +x ./mvnw'
                     sh './mvnw clean package -DskipTests'
-                    sh "docker build -t ${BACKEND_IMAGE} ."
+                    sh 'docker build -t faizzpersonal/lms-backend:latest .'
                 }
             }
         }
-        stage('Build Frontend Image') {
+        stage('Build Frontend') {
             steps {
                 dir('library-frontend') {
                     sh 'npm install'
                     sh 'npm run build'
-                    sh "docker build -t ${FRONTEND_IMAGE} ."
+                    sh 'docker build -t faizzpersonal/library-frontend:latest .'
                 }
             }
         }
         stage('Push Images') {
             steps {
-                withCredentials([usernamePassword(credentialsId: DOCKERHUB_CREDENTIALS, usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
-                    sh 'echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin'
-                    sh "docker push ${BACKEND_IMAGE}"
-                    sh "docker push ${FRONTEND_IMAGE}"
+                withCredentials([usernamePassword(credentialsId: 'Docker', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+                    sh 'echo $DOCKER_PASS | docker login --username $DOCKER_USER --password-stdin'
+                    sh 'docker push faizzpersonal/lms-backend:latest'
+                    sh 'docker push faizzpersonal/library-frontend:latest'
                     sh 'docker logout'
                 }
             }
