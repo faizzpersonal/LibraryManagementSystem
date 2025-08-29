@@ -1,11 +1,13 @@
 pipeline {
     agent any
+
     environment {
         DOCKERHUB_CREDENTIALS = 'Docker'
         DOCKERHUB_USERNAME = 'faizzpersonal'
         BACKEND_IMAGE = "${DOCKERHUB_USERNAME}/lms-backend:latest"
         FRONTEND_IMAGE = "${DOCKERHUB_USERNAME}/library-frontend:latest"
     }
+
     stages {
         stage('Checkout') {
             steps {
@@ -13,14 +15,17 @@ pipeline {
                     url: 'https://github.com/faizzpersonal/LibraryManagementSystem.git'
             }
         }
+
         stage('Build Backend Image') {
             steps {
                 dir('LMS') {
+                    sh 'chmod +x mvnw'
                     sh './mvnw clean package -DskipTests'
                     sh "docker build -t ${BACKEND_IMAGE} ."
                 }
             }
         }
+
         stage('Build Frontend Image') {
             steps {
                 dir('library-frontend') {
@@ -30,6 +35,7 @@ pipeline {
                 }
             }
         }
+
         stage('Push Images') {
             steps {
                 withCredentials([usernamePassword(credentialsId: DOCKERHUB_CREDENTIALS, usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
@@ -40,6 +46,7 @@ pipeline {
                 }
             }
         }
+
         stage('Deploy to Kubernetes') {
             steps {
                 withCredentials([file(credentialsId: 'kube', variable: 'KUBECONFIG')]) {
