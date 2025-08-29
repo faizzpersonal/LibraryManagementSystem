@@ -6,10 +6,6 @@ pipeline {
         BACKEND_IMAGE = "${DOCKERHUB_USERNAME}/lms-backend:latest"
         FRONTEND_IMAGE = "${DOCKERHUB_USERNAME}/library-frontend:latest"
     }
-    tools {
-        maven 'maven3.9'
-        jdk 'jdk17'
-    }
     stages {
         stage('Checkout') {
             steps {
