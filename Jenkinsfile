@@ -20,7 +20,7 @@ pipeline {
         stage('Build Backend Image') {
             steps {
                 dir('LMS') {
-                    sh 'chmod +x ./mvnw'              // Ensure mvnw is executable
+                    sh 'chmod +x ./mvnw'
                     sh './mvnw clean package -DskipTests'
                     sh "docker build -t ${BACKEND_IMAGE} ."
                 }
